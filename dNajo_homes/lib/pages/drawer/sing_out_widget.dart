@@ -28,7 +28,6 @@ class SingOutWidget extends StatelessWidget {
             ),
             onTap: () {
               onTapped();
-              Get.off(() => const LoginPage());
             },
           ),
         ),
@@ -39,8 +38,10 @@ class SingOutWidget extends StatelessWidget {
     );
   }
 
-  void onTapped() {
-    var user = FirebaseAuth.instance;
-    user.signOut();
+  void onTapped() async {
+    await FirebaseAuth.instance.signOut().then((value) {
+      Get.snackbar('Response', 'Successful');
+      Get.off(() => const LoginPage());
+    });
   }
 }

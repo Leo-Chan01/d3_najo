@@ -1,4 +1,6 @@
 import 'package:dnajo_homes/pages/auth/login/widgets/background.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +13,11 @@ import '/components/rounded_button.dart';
 import '/components/rounded_input_field.dart';
 
 class LoginPageBody extends StatelessWidget {
-  const LoginPageBody({
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  var _isLoading = false;
+
+  LoginPageBody({
     Key? key,
   }) : super(key: key);
 
@@ -46,18 +52,25 @@ class LoginPageBody extends StatelessWidget {
                   children: [
                     SizedBox(height: size.height * 0.04),
                     RoundedInputField(
+                      controller: _emailCtrl,
                       hintText: "Your Email",
                       onChanged: (value) {},
                     ),
                     RoundedPasswordField(
+                      controller: _passwordCtrl,
                       onChanged: (value) {},
                     ),
-                    RoundedButton(
-                      text: "LOGIN",
-                      onPressed: () {
-                        Get.off(() => const NavigationHomePage());
-                      },
-                    ),
+                    _isLoading == false
+                        ? RoundedButton(
+                            text: "LOGIN",
+                            onPressed: () {
+                              _logUserIn(_emailCtrl.text, _passwordCtrl.text);
+                              Get.off(() => const NavigationHomePage());
+                            },
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(),
+                          ),
                     SizedBox(height: size.height * 0.03),
                     AlreadyHaveAnAccountCheck(
                       onTap: () {
@@ -73,5 +86,29 @@ class LoginPageBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _logUserIn(String emailAddress, String password) async {
+    try {
+      // ignore: unused_local_variable
+      _isLoading = true;
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: emailAddress, password: password)
+          .then((value) {
+        Get.snackbar('Message', 'Logged in successfully');
+      });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        if (kDebugMode) {
+          print('No user found for that email.');
+        }
+      } else if (e.code == 'wrong-password') {
+        if (kDebugMode) {
+          print('Wrong password provided for that user.');
+        }
+      }
+    } finally {
+      _isLoading = false;
+    }
   }
 }

@@ -1,4 +1,3 @@
-import 'package:dnajo_homes/pages/home/home_page.dart';
 import 'package:dnajo_homes/utils/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -105,26 +104,28 @@ class SingupPageBody extends StatelessWidget {
     );
   }
 
-  // FirebaseAuth.instance
-  // .authStateChanges()
-  // .listen((User? user) {
-  //   if (user == null) {
-  //     print('User is currently signed out!');
-  //   } else {
-  //     print('User is signed in!');
-  //   }
-  // });
-
   void _signUserUp(String email, String password) async {
-    var auth = FirebaseAuth.instance;
-    await auth
-        .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) {
-      if (kDebugMode) {
-        print(value);
+    try {
+      // ignore: unused_local_variable
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        if (kDebugMode) {
+          print('The password provided is too weak.');
+        }
+      } else if (e.code == 'email-already-in-use') {
+        if (kDebugMode) {
+          print('The account already exists for that email.');
+        }
       }
-      Get.snackbar('message', value.toString());
-      Get.off(() => const NavigationHomePage());
-    });
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 }
