@@ -1,21 +1,26 @@
 import 'package:dnajo_homes/pages/home/home_page.dart';
 import 'package:dnajo_homes/utils/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:get/get.dart';
 
-import '../../drawer/home_navigation.dart';
+import '../../../drawer/home_navigation.dart';
+import '../../login/login_page.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_button.dart';
 import '/components/rounded_input_field.dart';
 import '/components/rounded_password_field.dart';
-import '/pages/login/login_page.dart';
-import '/pages/singup/widgets/background.dart';
-import '/pages/singup/widgets/or_divider.dart';
+import 'background.dart';
+import 'or_divider.dart';
 
 class SingupPageBody extends StatelessWidget {
-  const SingupPageBody({
+  final _emailCtrl = TextEditingController();
+  final _passWordCtrl = TextEditingController();
+
+  SingupPageBody({
     Key? key,
   }) : super(key: key);
 
@@ -51,15 +56,18 @@ class SingupPageBody extends StatelessWidget {
                   children: [
                     SizedBox(height: size.height * 0.04),
                     RoundedInputField(
+                      controller: _emailCtrl,
                       hintText: "Your Email",
                       onChanged: (value) {},
                     ),
                     RoundedPasswordField(
+                      controller: _passWordCtrl,
                       onChanged: (value) {},
                     ),
                     RoundedButton(
                       text: "SIGNUP",
                       onPressed: () {
+                        _signUserUp(_emailCtrl.text, _passWordCtrl.text);
                         Get.off(() => const NavigationHomePage());
                       },
                     ),
@@ -95,5 +103,28 @@ class SingupPageBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  // FirebaseAuth.instance
+  // .authStateChanges()
+  // .listen((User? user) {
+  //   if (user == null) {
+  //     print('User is currently signed out!');
+  //   } else {
+  //     print('User is signed in!');
+  //   }
+  // });
+
+  void _signUserUp(String email, String password) async {
+    var auth = FirebaseAuth.instance;
+    await auth
+        .createUserWithEmailAndPassword(email: email, password: password)
+        .then((value) {
+      if (kDebugMode) {
+        print(value);
+      }
+      Get.snackbar('message', value.toString());
+      Get.off(() => const NavigationHomePage());
+    });
   }
 }

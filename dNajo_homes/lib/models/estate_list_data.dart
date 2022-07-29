@@ -27,7 +27,7 @@ class EstateListData {
     EstateListData(
       imageUrl: 'assets/images/estate_1.jpg',
       titleTxt: 'Grand Royal ',
-      subTxt: 'Kensington, NY',
+      subTxt: 'Victoria Garden City, Lagos',
       distance: 2,
       reviews: 71,
       rating: 4.4,

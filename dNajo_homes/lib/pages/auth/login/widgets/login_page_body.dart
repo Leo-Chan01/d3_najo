@@ -1,16 +1,14 @@
-import 'package:dnajo_homes/pages/home/home_page.dart';
+import 'package:dnajo_homes/pages/auth/login/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/constants.dart';
-import '../../drawer/home_navigation.dart';
-import '/pages/forgot_password/forgot_password_page.dart';
+import '../../../../utils/constants.dart';
+import '../../../drawer/home_navigation.dart';
+import '../../singup/singup_page.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_password_field.dart';
-import '/pages/singup/singup_page.dart';
 import '/components/rounded_button.dart';
 import '/components/rounded_input_field.dart';
-import '/pages/login/widgets/background.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({

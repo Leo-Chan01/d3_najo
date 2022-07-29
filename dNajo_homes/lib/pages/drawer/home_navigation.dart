@@ -75,7 +75,7 @@ class _NavigationHomePageState extends State<NavigationHomePage> {
         });
       } else if (drawerIndex == DrawerIndex.blog) {
         setState(() {
-          //  PageView = InviteFriend();
+          //  pageView = InviteFriend();
         });
       } else if (drawerIndex == DrawerIndex.settings) {
         setState(() {

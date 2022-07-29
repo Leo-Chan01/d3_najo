@@ -1,10 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'pages/welcome/welcome_page.dart';
+import 'firebase_options.dart';
+import 'pages/auth/wrapper.dart';
 import 'utils/constants.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
           color: kPrimaryColor,
         ),
       ),
-      home: const WelcomePage(),
+      home: const Wrapper(),
     );
   }
 }

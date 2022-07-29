@@ -1,4 +1,7 @@
+import 'package:dnajo_homes/pages/auth/login/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SingOutWidget extends StatelessWidget {
   const SingOutWidget({Key? key}) : super(key: key);
@@ -25,6 +28,7 @@ class SingOutWidget extends StatelessWidget {
             ),
             onTap: () {
               onTapped();
+              Get.off(() => const LoginPage());
             },
           ),
         ),
@@ -36,6 +40,7 @@ class SingOutWidget extends StatelessWidget {
   }
 
   void onTapped() {
-    // print('Doing Something...');
+    var user = FirebaseAuth.instance;
+    user.signOut();
   }
 }
