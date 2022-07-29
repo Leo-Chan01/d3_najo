@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_estate/pages/home/estate_detail_page.dart';
 
+import '../../home/estate_detail_page.dart';
 import '/models/estate_list_data.dart';
 import '/utils/constants.dart';
 

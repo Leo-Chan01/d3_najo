@@ -1,7 +1,11 @@
+import 'package:dnajo_homes/pages/home/home_page.dart';
+import 'package:dnajo_homes/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:get/get.dart';
 
+import '../../drawer/home_navigation.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_button.dart';
 import '/components/rounded_input_field.dart';
@@ -14,62 +18,80 @@ class SingupPageBody extends StatelessWidget {
   const SingupPageBody({
     Key? key,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: Background(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: size.height * 0.02),
-            Image(
-              image: const AssetImage(
-                "assets/images/logo.png",
+    return Background(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 24),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: size.height * 0.02),
+              const Text(
+                'Welcome',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold),
               ),
-              height: size.height * 0.3,
-            ),
-            RoundedInputField(
-              hintText: "Your Email",
-              onChanged: (value) {},
-            ),
-            RoundedPasswordField(
-              onChanged: (value) {},
-            ),
-            RoundedButton(
-              text: "SIGNUP",
-              onPressed: () {},
-            ),
-            SizedBox(height: size.height * 0.03),
-            AlreadyHaveAnAccountCheck(
-              login: false,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginPage();
-                    },
-                  ),
-                );
-              },
-            ),
-            const OrDivider(),
-            Column(
-              children: <Widget>[
-                SignInButton(
-                  Buttons.Facebook,
-                  onPressed: () {},
+              SizedBox(height: size.height * 0.04),
+              Container(
+                decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: kPrimaryColor,
+                          blurRadius: 10.0,
+                          spreadRadius: 1.0)
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25)),
+                child: Column(
+                  children: [
+                    SizedBox(height: size.height * 0.04),
+                    RoundedInputField(
+                      hintText: "Your Email",
+                      onChanged: (value) {},
+                    ),
+                    RoundedPasswordField(
+                      onChanged: (value) {},
+                    ),
+                    RoundedButton(
+                      text: "SIGNUP",
+                      onPressed: () {
+                        Get.off(() => const NavigationHomePage());
+                      },
+                    ),
+                    SizedBox(height: size.height * 0.03),
+                    AlreadyHaveAnAccountCheck(
+                      login: false,
+                      onTap: () {
+                        Get.off(() => const LoginPage());
+                      },
+                    ),
+                    const OrDivider(),
+                    Column(
+                      children: <Widget>[
+                        SignInButton(
+                          Buttons.Facebook,
+                          onPressed: () {},
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SignInButton(
+                            Buttons.Google,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: size.height * 0.04),
+                  ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SignInButton(
-                    Buttons.Google,
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

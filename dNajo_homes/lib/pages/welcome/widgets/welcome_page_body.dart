@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '/components/rounded_button.dart';
 import '/pages/login/login_page.dart';
@@ -31,14 +32,7 @@ class WelcomePageBody extends StatelessWidget {
             RoundedButton(
               text: "LOGIN",
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginPage();
-                    },
-                  ),
-                );
+                Get.off(() => const LoginPage());
               },
             ),
             RoundedButton(
@@ -46,14 +40,7 @@ class WelcomePageBody extends StatelessWidget {
               color: kPrimaryLightColor,
               textColor: Colors.black,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const SignUpPage();
-                    },
-                  ),
-                );
+                Get.off(() => const SignUpPage());
               },
             ),
           ],

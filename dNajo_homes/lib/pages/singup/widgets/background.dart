@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
+
 class Background extends StatelessWidget {
   final Widget child;
   const Background({
@@ -10,22 +12,26 @@ class Background extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height,
-      width: double.infinity,
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Positioned(
-            top: 0,
-            left: 0,
-            child: Image.asset(
-              "assets/images/signup_top.png",
-              width: size.width * 0.39,
-            ),
-          ),
-          child,
+    return Container(
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Color.fromRGBO(184, 134, 11, 1.0),
+          kPrimaryLightColor,
+          Colors.white,
         ],
+      )),
+      child: SizedBox(
+        width: double.infinity,
+        height: size.height,
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            child,
+          ],
+        ),
       ),
     );
   }
