@@ -1,10 +1,8 @@
-import 'package:dnajo_homes/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/constants.dart';
 import '../../drawer/home_navigation.dart';
-import '/pages/forgot_password/forgot_password_page.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_password_field.dart';
 import '/pages/singup/singup_page.dart';
