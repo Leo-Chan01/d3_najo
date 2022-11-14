@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../components/dn_form_field.dart';
+import '../../../components/dn_password_form_field.dart';
 import '../../../utils/constants.dart';
 import '../../drawer/home_navigation.dart';
 import '/components/already_have_account_check.dart';
@@ -17,6 +19,8 @@ class LoginPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _emailCtrl = TextEditingController();
+    final _passwordCtrl = TextEditingController();
     Size size = MediaQuery.of(context).size;
     return Background(
       child: SingleChildScrollView(
@@ -27,7 +31,7 @@ class LoginPageBody extends StatelessWidget {
               const Text(
                 'Welcome back',
                 style: TextStyle(
-                    color: Colors.white,
+                    color: kPrimaryColor,
                     fontSize: 32,
                     fontWeight: FontWeight.bold),
               ),
@@ -36,7 +40,7 @@ class LoginPageBody extends StatelessWidget {
                 decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(
-                          color: kPrimaryColor,
+                          color: Colors.grey,
                           blurRadius: 10.0,
                           spreadRadius: 1.0)
                     ],
@@ -45,13 +49,21 @@ class LoginPageBody extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: size.height * 0.04),
-                    RoundedInputField(
-                      hintText: "Your Email",
-                      onChanged: (value) {},
-                    ),
-                    RoundedPasswordField(
-                      onChanged: (value) {},
-                    ),
+                    // RoundedInputField(
+                    //   hintText: "Your Email",
+                    //   onChanged: (value) {},
+                    // ),
+
+                    DNFormField(
+                        hint: 'Email address',
+                        title: 'Email address',
+                        controller: _emailCtrl,
+                        emailType: true),
+                    // RoundedPasswordField(
+                    //   onChanged: (value) {},
+                    // ),
+                    DNPasswordFormField(
+                        create: true, controller: _passwordCtrl),
                     RoundedButton(
                       text: "LOGIN",
                       onPressed: () {

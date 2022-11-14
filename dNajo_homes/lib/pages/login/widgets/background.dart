@@ -1,4 +1,3 @@
-import 'package:dnajo_homes/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class Background extends StatelessWidget {
@@ -17,8 +16,7 @@ class Background extends StatelessWidget {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Color.fromRGBO(184, 134, 11, 1.0),
-          kPrimaryLightColor,
+          Colors.white,
           Colors.white,
         ],
       )),

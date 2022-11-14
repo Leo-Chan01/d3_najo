@@ -4,6 +4,8 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:get/get.dart';
 
+import '../../../components/dn_form_field.dart';
+import '../../../components/dn_password_form_field.dart';
 import '../../drawer/home_navigation.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_button.dart';
@@ -14,7 +16,10 @@ import '/pages/singup/widgets/background.dart';
 import '/pages/singup/widgets/or_divider.dart';
 
 class SingupPageBody extends StatelessWidget {
-  const SingupPageBody({
+  final _emailCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+
+  SingupPageBody({
     Key? key,
   }) : super(key: key);
 
@@ -40,7 +45,7 @@ class SingupPageBody extends StatelessWidget {
                 decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(
-                          color: kPrimaryColor,
+                          color: Colors.grey,
                           blurRadius: 10.0,
                           spreadRadius: 1.0)
                     ],
@@ -49,13 +54,13 @@ class SingupPageBody extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(height: size.height * 0.04),
-                    RoundedInputField(
-                      hintText: "Your Email",
-                      onChanged: (value) {},
-                    ),
-                    RoundedPasswordField(
-                      onChanged: (value) {},
-                    ),
+                    DNFormField(
+                        hint: 'Email address',
+                        title: 'Email address',
+                        controller: _emailCtrl,
+                        emailType: true),
+                    DNPasswordFormField(
+                        create: true, controller: _passwordCtrl),
                     RoundedButton(
                       text: "SIGNUP",
                       onPressed: () {

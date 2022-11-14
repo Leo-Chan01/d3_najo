@@ -31,13 +31,15 @@ class WelcomePageBody extends StatelessWidget {
             SizedBox(height: size.height * 0.5),
             RoundedButton(
               text: "LOGIN",
+              color: kPrimaryLightColor,
+              textColor: Colors.black,
               onPressed: () {
                 Get.off(() => const LoginPage());
               },
             ),
             RoundedButton(
               text: "SIGN UP",
-              color: kPrimaryLightColor,
+              color: Colors.white,
               textColor: Colors.black,
               onPressed: () {
                 Get.off(() => const SignUpPage());

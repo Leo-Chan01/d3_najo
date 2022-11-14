@@ -24,9 +24,11 @@ class RoundedInputField extends StatelessWidget {
         cursorColor: kPrimaryColor,
         keyboardType: textInputType ?? TextInputType.emailAddress,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.grey,
           icon: Icon(
             icon,
-            color: kPrimaryColor,
+            color: Colors.grey,
           ),
           hintText: hintText,
           border: InputBorder.none,
