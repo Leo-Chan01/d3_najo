@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/constants.dart';
-
 class Background extends StatelessWidget {
   final Widget child;
   const Background({

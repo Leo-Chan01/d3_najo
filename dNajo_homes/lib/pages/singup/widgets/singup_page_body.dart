@@ -1,4 +1,3 @@
-import 'package:dnajo_homes/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -9,8 +8,6 @@ import '../../../components/dn_password_form_field.dart';
 import '../../drawer/home_navigation.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_button.dart';
-import '/components/rounded_input_field.dart';
-import '/components/rounded_password_field.dart';
 import '/pages/login/login_page.dart';
 import '/pages/singup/widgets/background.dart';
 import '/pages/singup/widgets/or_divider.dart';

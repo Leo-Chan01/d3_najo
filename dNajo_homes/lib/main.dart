@@ -1,10 +1,18 @@
+import 'package:dnajo_homes/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'pages/welcome/welcome_page.dart';
-import 'utils/constants.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -16,13 +24,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'DNajo Homes',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          color: kPrimaryColor,
-        ),
-      ),
+      // theme: ThemeData(
+      //   primaryColor: kPrimaryColor,
+      //   scaffoldBackgroundColor: Colors.white,
+      //   appBarTheme: const AppBarTheme(
+      //     color: kPrimaryColor,
+      //   ),
+      // ),
+      theme: appTheme,
       home: const WelcomePage(),
     );
   }
