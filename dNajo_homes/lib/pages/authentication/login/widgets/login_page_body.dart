@@ -1,14 +1,15 @@
+import 'package:dnajo_homes/pages/authentication/login/widgets/background.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../components/dn_form_field.dart';
-import '../../../components/dn_password_form_field.dart';
-import '../../../utils/constants.dart';
-import '../../drawer/home_navigation.dart';
+import '../../../../components/dn_form_field.dart';
+import '../../../../components/dn_password_form_field.dart';
+import '../../../../utils/theme.dart';
+import '../../../drawer/home_navigation.dart';
+import '../../singup/singup_page.dart';
 import '/components/already_have_account_check.dart';
-import '/pages/singup/singup_page.dart';
 import '/components/rounded_button.dart';
-import '/pages/login/widgets/background.dart';
 
 class LoginPageBody extends StatelessWidget {
   const LoginPageBody({
@@ -65,7 +66,11 @@ class LoginPageBody extends StatelessWidget {
                     RoundedButton(
                       text: "LOGIN",
                       onPressed: () {
-                        Get.off(() => const NavigationHomePage());
+                        (_emailCtrl.text == "" || _passwordCtrl.text == "")
+                            ? const GetSnackBar(
+                                title: "Validation Error",
+                                message: "Fields cannot be empty")
+                            : _logUserIn(_emailCtrl.text, _passwordCtrl.text);
                       },
                     ),
                     SizedBox(height: size.height * 0.03),
@@ -83,5 +88,28 @@ class LoginPageBody extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _logUserIn(String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      if (userCredential.user?.displayName != null) {
+        Get.off(() => const NavigationHomePage());
+      } else {
+        const GetSnackBar(title: "Error", message: "Login failed");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        const GetSnackBar(title: "Error", message: "This user not found");
+      } else if (e.code == 'wrong-password') {
+        const GetSnackBar(
+            titleText: Text("Error"),
+            messageText: Text("Wrong password for this user"));
+      } else if (e.code == 'wrong-email') {
+        const GetSnackBar(
+            titleText: Text("Error"), messageText: Text("Wrong Email"));
+      }
+    }
   }
 }

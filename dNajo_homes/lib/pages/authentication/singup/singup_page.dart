@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/pages/singup/widgets/singup_page_body.dart';
+import 'widgets/singup_page_body.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({

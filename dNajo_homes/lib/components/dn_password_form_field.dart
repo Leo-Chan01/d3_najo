@@ -20,11 +20,11 @@ class _DNPasswordFormFieldState extends State<DNPasswordFormField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text('Password',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText2
-                ?.copyWith(color: kPrimaryColor)),
+        // Text('Password',
+        //     style: Theme.of(context)
+        //         .textTheme
+        //         .bodyText2
+        //         ?.copyWith(color: kPrimaryColor)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),

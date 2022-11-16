@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../authentication/login/login_page.dart';
+import '../../authentication/singup/singup_page.dart';
 import '/components/rounded_button.dart';
-import '/pages/login/login_page.dart';
-import '/pages/singup/singup_page.dart';
 import '/pages/welcome/widgets/background.dart';
 import '/utils/constants.dart';
 
