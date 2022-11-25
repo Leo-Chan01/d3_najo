@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '/models/estate_list_data.dart';
 import '/pages/discover/widgets/estate_list_view.dart';
-import '/pages/home/estate_detail_page.dart';
+import '../main_screen/home/estate_detail_page.dart';
 import '/pages/discover/widgets/filter_bar.dart';
 import '/components/header.dart';
 import '/components/search_bar.dart';

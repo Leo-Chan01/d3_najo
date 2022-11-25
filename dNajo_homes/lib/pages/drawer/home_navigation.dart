@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/pages/favorite/favorite_page.dart';
 import '/pages/settings/settings_page.dart';
-import '/pages/home/home_page.dart';
+import '../main_screen/home/home_page.dart';
 import '/pages/discover/discover_page.dart';
 import 'drawer_user_controller.dart';
 import 'home_drawer.dart';

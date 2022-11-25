@@ -20,14 +20,6 @@ class WelcomePageBody extends StatelessWidget {
         child: Column(
           children: <Widget>[
             SizedBox(height: size.height * 0.2),
-            // const Text(
-            //   "WELCOME",
-            //   style: TextStyle(
-            //     fontWeight: FontWeight.bold,
-            //     fontSize: 26,
-            //     color: Colors.white,
-            //   ),
-            // ),
             Image.asset("assets/images/logo.png", scale: 0.01, width: 200),
             SizedBox(height: size.height * 0.5),
             RoundedButton(

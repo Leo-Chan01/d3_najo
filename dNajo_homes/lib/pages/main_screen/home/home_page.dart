@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import '/components/nearby_lilst_item.dart';
 import '/models/estate_list_data.dart';
-import '/pages/home/all_estates_page.dart';
-import '/pages/home/estate_detail_page.dart';
 import '/utils/constants.dart';
 import '/components/most_visited_list_item.dart';
 import '/components/search_bar.dart';
 import '/components/see_all_widget.dart';
 import '/components/header.dart';
+import 'all_estates_page.dart';
+import 'estate_detail_page.dart';
 
 class EstateHomePage extends StatefulWidget {
   const EstateHomePage({

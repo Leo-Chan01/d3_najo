@@ -35,53 +35,34 @@ class LoginPageBody extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: size.height * 0.04),
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 10.0,
-                          spreadRadius: 1.0)
-                    ],
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25)),
-                child: Column(
-                  children: [
-                    SizedBox(height: size.height * 0.04),
-                    // RoundedInputField(
-                    //   hintText: "Your Email",
-                    //   onChanged: (value) {},
-                    // ),
-
-                    DNFormField(
-                        hint: 'Email address',
-                        title: 'Email address',
-                        controller: _emailCtrl,
-                        emailType: true),
-                    // RoundedPasswordField(
-                    //   onChanged: (value) {},
-                    // ),
-                    DNPasswordFormField(
-                        create: true, controller: _passwordCtrl),
-                    RoundedButton(
-                      text: "LOGIN",
-                      onPressed: () {
-                        (_emailCtrl.text == "" || _passwordCtrl.text == "")
-                            ? const GetSnackBar(
-                                title: "Validation Error",
-                                message: "Fields cannot be empty")
-                            : _logUserIn(_emailCtrl.text, _passwordCtrl.text);
-                      },
-                    ),
-                    SizedBox(height: size.height * 0.03),
-                    AlreadyHaveAnAccountCheck(
-                      onTap: () {
-                        Get.to(() => const SignUpPage());
-                      },
-                    ),
-                    SizedBox(height: size.height * 0.04),
-                  ],
-                ),
+              Column(
+                children: [
+                  SizedBox(height: size.height * 0.04),
+                  DNFormField(
+                      hint: 'Email address',
+                      title: 'Email address',
+                      controller: _emailCtrl,
+                      emailType: true),
+                  DNPasswordFormField(create: false, controller: _passwordCtrl),
+                  RoundedButton(
+                    text: "LOGIN",
+                    onPressed: () {
+                      (_emailCtrl.text == "" || _passwordCtrl.text == "")
+                          ? ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Fields cannot be empty")))
+                          : _logUserIn(
+                              _emailCtrl.text, _passwordCtrl.text, context);
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  AlreadyHaveAnAccountCheck(
+                    onTap: () {
+                      Get.to(() => const SignUpPage());
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.04),
+                ],
               ),
             ],
           ),
@@ -90,25 +71,37 @@ class LoginPageBody extends StatelessWidget {
     );
   }
 
-  _logUserIn(String email, String password) async {
+  _logUserIn(String email, String password, BuildContext context) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) async {
+        User? user = FirebaseAuth.instance.currentUser;
+
+        if (user != null && !user.emailVerified) {
+          await user.sendEmailVerification();
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text("Check your mail for verification")));
+        }
+          throw Exception(Exception);
+      
+      });
       if (userCredential.user?.displayName != null) {
         Get.off(() => const NavigationHomePage());
       } else {
-        const GetSnackBar(title: "Error", message: "Login failed");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Login failed")));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        const GetSnackBar(title: "Error", message: "This user not found");
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("User not found")));
       } else if (e.code == 'wrong-password') {
-        const GetSnackBar(
-            titleText: Text("Error"),
-            messageText: Text("Wrong password for this user"));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Wrong password for this user")));
       } else if (e.code == 'wrong-email') {
-        const GetSnackBar(
-            titleText: Text("Error"), messageText: Text("Wrong Email"));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Check your email")));
       }
     }
   }

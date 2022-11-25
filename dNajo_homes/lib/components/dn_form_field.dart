@@ -23,11 +23,6 @@ class DNFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        // Text(hint,
-        //     style: Theme.of(context)
-        //         .textTheme
-        //         .bodyText2
-        //         ?.copyWith(color: kPrimaryColor)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
@@ -36,7 +31,7 @@ class DNFormField extends StatelessWidget {
               decoration: InputDecoration(
                   // enabledBorder: ,
                   enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black, width: 2.0)),
+                      borderSide: BorderSide(color: Colors.grey, width: 2.0)),
                   focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: kPrimaryColor, width: 2.0)),
                   contentPadding: const EdgeInsets.symmetric(
