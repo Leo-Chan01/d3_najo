@@ -1,4 +1,5 @@
 import 'package:dnajo_homes/pages/authentication/login/widgets/background.dart';
+import 'package:dnajo_homes/pages/main_screen/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -83,11 +84,16 @@ class LoginPageBody extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text("Check your mail for verification")));
         }
-          throw Exception(Exception);
-      
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+            (route) => false);
+        throw Exception(Exception);
       });
       if (userCredential.user?.displayName != null) {
-        Get.off(() => const NavigationHomePage());
+        // Get.off(() => const NavigationHomePage());
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+            (route) => false);
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(const SnackBar(content: Text("Login failed")));

@@ -78,12 +78,12 @@ class _MainScreenState extends State<MainScreen> {
           inactiveColorPrimary: Colors.grey),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.carpenter_rounded),
-          title: "Building Materials",
+          title: "Building",
           activeColorPrimary: kPrimaryColor,
           inactiveColorPrimary: Colors.grey),
       PersistentBottomNavBarItem(
           icon: const Icon(Icons.car_rental_rounded),
-          title: "Automobiles",
+          title: "Auto",
           activeColorPrimary: kPrimaryColor,
           inactiveColorPrimary: Colors.grey),
     ];
