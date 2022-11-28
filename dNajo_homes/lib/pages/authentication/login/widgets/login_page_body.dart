@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../../components/dn_form_field.dart';
 import '../../../../components/dn_password_form_field.dart';
 import '../../../../utils/theme.dart';
-import '../../../drawer/home_navigation.dart';
 import '../../singup/singup_page.dart';
 import '/components/already_have_account_check.dart';
 import '/components/rounded_button.dart';

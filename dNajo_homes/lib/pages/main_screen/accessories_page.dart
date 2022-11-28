@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/theme.dart';
-
 class AccessoriesPage extends StatefulWidget {
   const AccessoriesPage({super.key});
 
@@ -16,22 +14,26 @@ class _AccessoriesPageState extends State<AccessoriesPage> {
     var appWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: const Text("DNajo Phones"),
+          titleTextStyle: const TextStyle(
+              color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.notifications,
+                color: Colors.black,
+                size: 28,
+              ),
+            ),
+          ],
+        ),
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 16.0, top: 16),
-              child: Text(
-                "Accessories",
-                style: TextStyle(
-                    fontSize: 32,
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black),
-              ),
-            ),
             Container(
-              margin: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0),
+              margin: const EdgeInsets.only(left: 16.0, right: 16.0),
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
                   maxHeight: MediaQuery.of(context).size.height),
